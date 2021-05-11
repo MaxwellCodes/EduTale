@@ -6,14 +6,65 @@
     <title>repl.it</title>
     <link href="index.css" rel="stylesheet" type="text/css" />
   </head>
-  <body>
+  <body onload="startGame()">
     <canvas data-processing-sources="index.java"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.6.6/processing.min.js"></script>
    
+<!-- Action Boxes -->
+   <div class="wrapper">
+  <!-- <div class="message"></div> -->
+
+      <div class="choices">
+      <div class="choice fight">
+      <i class="fa fa-cut"></i>
+      <span>FIGHT</span>
+    </div>
+
+    <div class="choice act">
+      <i class="fa fa-angle-double-right"></i>
+      <span>ACT</span>
+    </div>
+
+    <div class="choice item">
+      <i class="fa fa-archive"></i>
+      <span>ITEM</span>
+    </div>
+
+
+  </div><!-- END choices-->
+</div><!-- END wrapper-->
+
    <script src="index.js"></script> 
   
   </body>
   <script>
     
+    //Sound Settings//
+
+  var gameTheme;
+  function startGame(){
+  gameTheme = new sound("/gameSounds/gameTheme.mp3");
+  damageTaken = new sound("/gameSounds/damageBoosted.mp3");
+  playerDeath = new sound("/gameSounds/gameOver.mp3");
+  soulBreaking = new sound("/gameSounds/soulBreaking.mp3");
+  gameTheme.play();
+  
+
+  }
+  
+  function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }    
+} 
   </script>
 </html>
